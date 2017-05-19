@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Swiss Public Transport</string>
+    <string name="title_station_list">Stations</string>
+    <string name="title_station_detail">Station Detail</string>
+</resources>
