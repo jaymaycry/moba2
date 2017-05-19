@@ -7,3 +7,4 @@
     android:padding="16dp"
     android:textIsSelectable="true"
     tools:context="com.example.jay.spt.StationDetailFragment" />
+

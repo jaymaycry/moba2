@@ -3,6 +3,7 @@ package com.example.jay.spt.station;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,12 +26,6 @@ public class StationContent {
      */
     public static final Map<String, StationItem> ITEM_MAP = new HashMap<String, StationItem>();
 
-    /*static {
-        // Add some sample items.
-        for (int i = 1; i <= COUNT; i++) {
-            addItem(createDummyItem(i));
-        }
-    }*/
 
     public static void setItems(List<StationItem> items) {
         ITEMS.clear();
@@ -66,5 +61,7 @@ public class StationContent {
         public double x;
         public double y;
     }
+
+
 }
 
