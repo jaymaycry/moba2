@@ -20,6 +20,14 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.jay.spt.station.StationBoardContent;
 import com.example.jay.spt.station.StationContent;
+import com.google.android.gms.maps.CameraUpdateFactory;
+import com.google.android.gms.maps.GoogleMap;
+import com.google.android.gms.maps.MapFragment;
+import com.google.android.gms.maps.MapView;
+import com.google.android.gms.maps.OnMapReadyCallback;
+import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.gson.Gson;
 
 import java.text.SimpleDateFormat;
@@ -31,12 +39,13 @@ import java.util.List;
  * in two-pane mode (on tablets) or a {@link StationDetailActivity}
  * on handsets.
  */
-public class StationDetailFragment extends Fragment {
+public class StationDetailFragment extends Fragment implements OnMapReadyCallback {
     private RequestQueue queue;
     private static String baseUrl = "http://transport.opendata.ch/v1/stationboard?limit=5&id=";
 
     private ListView listView;
     private ArrayAdapter adapter;
+    private GoogleMap mMap;
 
     /**
      * The fragment argument representing the item ID that this fragment
@@ -71,6 +80,11 @@ public class StationDetailFragment extends Fragment {
 
             Activity activity = this.getActivity();
             CollapsingToolbarLayout appBarLayout = (CollapsingToolbarLayout) activity.findViewById(R.id.toolbar_layout);
+
+            //MapView map = (MapView) activity.findViewById(R.id.map);
+            SupportMapFragment mapFragment = (SupportMapFragment) this.getActivity().getSupportFragmentManager().findFragmentById(R.id.map);
+            mapFragment.getMapAsync(this);
+
             if (appBarLayout != null) {
                 appBarLayout.setTitle(mItem.name);
             }
@@ -130,5 +144,23 @@ public class StationDetailFragment extends Fragment {
         }
 
         return rootView;
+    }
+
+    /** Called when the map is ready. */
+    @Override
+    public void onMapReady(GoogleMap map) {
+        mMap = map;
+        LatLng position = new LatLng(mItem.coordinate.x, mItem.coordinate.y);
+        // Add some markers to the map, and add a data object to each marker.
+        mMap.addMarker(new MarkerOptions()
+                .position(position)
+                .title(mItem.name));
+        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(position,14));
+        Log.i("MAP", "Map set");
+        //mPerth.setTag(0);
+
+
+        // Set a listener for marker click.
+        //mMap.setOnMarkerClickListener(this);
     }
 }

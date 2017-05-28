@@ -24,7 +24,8 @@ public class StationDetailActivity extends AppCompatActivity {
         setContentView(R.layout.activity_station_detail);
         Toolbar toolbar = (Toolbar) findViewById(R.id.detail_toolbar);
         setSupportActionBar(toolbar);
-
+        toolbar.bringToFront();
+        
         // Show the Up button in the action bar.
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
